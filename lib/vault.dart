@@ -62,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             SpeedDialChild(
                 child: IconButton(
               icon: Icon(Icons.camera_alt),
+              color: const Color(0xFF7A87FB),
               onPressed: () async {
                 ImagePicker imagePicker = ImagePicker();
                 XFile? file =
@@ -100,6 +101,7 @@ class _HomePageState extends State<HomePage> {
             SpeedDialChild(
                 child: IconButton(
               icon: Icon(Icons.photo_library),
+              color: const Color(0xFF7A87FB),
               onPressed: () async {
                 ImagePicker imagePicker = ImagePicker();
                 XFile? file =
@@ -139,17 +141,22 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       // leading: const Icon(Icons.arrow_back_ios),
-      title: const Text("Vault"),
-      actions: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.refresh)),
-      ],
+      title: const Text(""),
+      // actions: [
+      //   IconButton(
+      //       onPressed: () {
+      //         Navigator.push(
+      //             context, MaterialPageRoute(builder: (_) => const vault()));
+      //       },
+      //       icon: const Icon(Icons.refresh)),
+      // ],
       headerWidget: headerWidget(context),
       headerBottomBar: headerBottomBarWidget(),
       body: [
         listView(context),
       ],
       backgroundColor: Colors.white,
-      appBarColor: Colors.teal,
+      appBarColor: Color(0xFF7A87FB),
     );
   }
 
@@ -173,7 +180,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget headerWidget(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: const Color(0xFF7A87FB),
       child: Center(
         child: Text(
           "Vault",
@@ -193,9 +200,10 @@ class _HomePageState extends State<HomePage> {
         future: getDocId(),
         builder: (context, snapshot) {
           return GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
             itemCount: docIds.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, crossAxisSpacing: 16, mainAxisSpacing: 16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, crossAxisSpacing: 0, mainAxisSpacing: 20),
             itemBuilder: (context, index) {
               return GridTile(
                 child: GetImage(documentId: docIds[index]),

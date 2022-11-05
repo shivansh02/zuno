@@ -18,7 +18,9 @@ class GetImage extends StatelessWidget {
                 snapshot.data!.data() as Map<String, dynamic>;
             return Image.network('${data["image"]}');
           }
-          return Text('data');
+          return CircularProgressIndicator(
+            color: Colors.purple,
+          );
         }));
   }
 }
