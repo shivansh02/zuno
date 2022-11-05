@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
+import 'vault.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -286,6 +287,12 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const vault()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 24.0),
                     child: Container(
