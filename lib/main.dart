@@ -92,37 +92,33 @@ class HomePage extends StatelessWidget {
                       width: (screenWidth / 2.46),
                       height: (screenHeight / 5.34),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 30.63),
-                              child: Icon(
-                                Icons.alarm,
-                                size: 47.37,
-                                color: Colors.white,
-                              ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Icon(
+                              Icons.alarm,
+                              size: 47.37,
+                              color: Colors.white,
                             ),
                           ),
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 13.0),
-                              child: Text(
-                                "Set new",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ),
-                          Center(
+                          Padding(
+                            padding: EdgeInsets.only(top: 0),
                             child: Text(
-                              "Reminders",
+                              "Set new",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600),
                             ),
+                          ),
+                          Text(
+                            "Reminders",
+                            style: TextStyle(
+                                height: 1,
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
                           )
                         ],
                       ),
@@ -145,25 +141,21 @@ class HomePage extends StatelessWidget {
                       width: (screenWidth / 2.54),
                       height: (screenHeight / 4.3),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 53, bottom: 20),
-                              child: Image.asset(
-                                'assets/Vector.png',
-                                color: Colors.white,
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            child: Image.asset(
+                              'assets/Vector.png',
+                              color: Colors.white,
                             ),
                           ),
-                          const Center(
-                            child: Text(
-                              "Brain Games",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                          Text(
+                            "Brain Games",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -193,23 +185,18 @@ class HomePage extends StatelessWidget {
                       width: (screenWidth / 2.54),
                       height: (screenHeight / 4.33),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                              child: Padding(
-                            padding: const EdgeInsets.only(top: 60),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: Image.asset('assets/vault.png'),
-                          )),
-                          const Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 25.17),
-                              child: Text(
-                                "Your Vault",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
+                          ),
+                          const Text(
+                            "Your Vault",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -271,30 +258,23 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(62.0),
                               color: const Color(0xFFFEE5B2),
-                              boxShadow: const [
-                                // BoxShadow(
-                                //     color: Color(0xFFFEE5B2),
-                                //     spreadRadius: 3,
-                                //     blurRadius: 11)
-                              ]),
+                              boxShadow: const []),
                           width: (screenWidth / 2.54),
                           height: (screenHeight / 10.6),
                           child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 6),
-                                  child: Image.asset('assets/pills.png'),
-                                ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: Image.asset('assets/pills.png'),
                               ),
-                              const Center(
-                                child: Text(
-                                  "Meds",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              const Text(
+                                "Meds",
+                                style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -452,7 +432,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25.39, left: 40),
+                        padding: const EdgeInsets.only(top: 25.39, left: 35),
                         child: Image.asset('assets/log.png'),
                       ),
                     ],
