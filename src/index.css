@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
+
+/* @tailwind base;
+@tailwind components; */
 @tailwind utilities;
+
 
 :root{
     --black: #242424;
@@ -11,8 +13,10 @@
     --pink: #FEE0DF;
     --skin: #FEE5B2;
     --white: #FFFFFF;
+
 }
 
 body{
     background-color: var(--light-blue);
+    font-family: 'Inter', sans-serif;
 }
