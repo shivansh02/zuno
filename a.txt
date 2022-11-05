@@ -1,17 +1,14 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDkLcHE2h3BoYN5h_vtL_OCusf0zYcQ_RY",
-  authDomain: "alzei-5b85e.firebaseapp.com",
-  projectId: "alzei-5b85e",
-  storageBucket: "alzei-5b85e.appspot.com",
-  messagingSenderId: "859812211840",
-  appId: "1:859812211840:web:b502bf844f768067ce8a65"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+   <div className="flex justify-between items-center">
+        <div className="flex items-center">
+          <ThemeIcon
+            radius="xl"
+            className={`bg-[${props.priorityColor}]`}
+          ></ThemeIcon>
+          <Title order={2}>{props.title}</Title>
+        </div>
+        <div className="flex flex-col items-end">
+          <Text>{props.date}</Text>
+          <Text>{props.time}</Text>
+        </div>
+      </div>
+      <div className="mt-4">adaldnalkdnalkfalnfn adaldnalkdnalkfalnfn</div>

@@ -7,6 +7,9 @@ import { ConnectWithAppPage } from "./pages/ConnectWithApp.jsx";
 import Signup from "./pages/Signup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LiveLocation from "./components/dashboardSections/Live-location";
+import SetReminder from "./components/dashboardSections/Set-Reminder";
+import Testing from "./components/dashboardSections/testingSec";
+import UpdatePrescription from "./components/dashboardSections/Update-Prescription";
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(true);
@@ -17,19 +20,25 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/connect-app" element={<ConnectWithAppPage />} />
-        {isLoggedIn
-          ? [
-              <>
-                <Route path="/dashboard" element={<Dashboard />}>
-                  <Route path={"/dashboard"} element={<Text>Dashboard</Text>} />
-                  <Route
-                    path={"/dashboard/live-location"}
-                    element={<LiveLocation />}
-                  />
-                </Route>
-              </>,
-            ]
-          : null}
+        {isLoggedIn ? (
+          <>
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route path={"/dashboard"} element={<Text>Dashboard</Text>} />
+              <Route
+                path={"/dashboard/live-location"}
+                element={<LiveLocation />}
+              />
+              <Route
+                path={"/dashboard/set-reminders"}
+                element={<SetReminder />}
+              />
+              <Route
+                path={"/dashboard/update-prescription"}
+                element={<UpdatePrescription />}
+              />
+            </Route>
+          </>
+        ) : null}
       </Routes>
     </Router>
   );

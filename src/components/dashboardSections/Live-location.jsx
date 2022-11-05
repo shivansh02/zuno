@@ -7,6 +7,7 @@ import {
   useMapEvent,
   Tooltip,
 } from "react-leaflet";
+import { Title } from "@mantine/core";
 import { Icon } from "leaflet";
 import ReactLeafletDriftMarker from "react-leaflet-drift-marker";
 
@@ -70,6 +71,7 @@ const LiveLocation = (props) => {
   }, []);
   return (
     <>
+      <Title className="mb-16 mt-8">Live Loocation</Title>
       {currentLocation && (
         <MapContainer
           center={[currentLocation.latitude, currentLocation.longitude]}

@@ -29,37 +29,38 @@ import {
 import NavigationBar from "../components/navBar";
 
 import { NavLink, Outlet } from "react-router-dom";
+import NavigationPane from "../components/navigationBar";
 
 export default function Dashboard(props) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
     <AppShell
-      className="bg-[#DCE7FD]"
+      className="bg-[#ffffff]"
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={<NavigationBar />}
-      header={
-        <Header height={90} p="md" className="bg-[#DCE7FD]">
-          <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          >
-            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <Burger
-                opened={opened}
-                onClick={() => setOpened((o) => !o)}
-                size="sm"
-                color={theme.colors.gray[6]}
-                mr="xl"
-              />
-            </MediaQuery>
+      navbar={<NavigationPane />}
+      // header={
+      //   <Header height={90} p="md" className="bg-[#DCE7FD]">
+      //     <div
+      //       style={{ display: "flex", alignItems: "center", height: "100%" }}
+      //     >
+      //       <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+      //         <Burger
+      //           opened={opened}
+      //           onClick={() => setOpened((o) => !o)}
+      //           size="sm"
+      //           color={theme.colors.gray[6]}
+      //           mr="xl"
+      //         />
+      //       </MediaQuery>
 
-            <Card radius="xl" className="w-full p-6 my-4"></Card>
-          </div>
-        </Header>
-      }
+      //       <Card radius="xl" className="w-full p-6 my-4"></Card>
+      //     </div>
+      //   </Header>
+      // }
     >
-      <Card radius="xl" className="w-full h-full">
+      <Card radius="xl" className="w-full h-full bg-amber">
         <Outlet />
       </Card>
     </AppShell>
