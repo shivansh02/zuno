@@ -1,11 +1,37 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:location/location.dart' as loc;
+import 'package:permission_handler/permission_handler.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(home: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final loc.Location location = loc.Location();
+  StreamSubscription<loc.LocationData>? _locationSubscription;
+
+  @override
+  void initState() {
+    // getDocId();
+    super.initState();
+    _requestPermission();
+    location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
+    location.enableBackgroundMode(enable: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,10 +44,94 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
     );
   }
+
+  // _getLocation() async {
+  //   try {
+  //     final loc.LocationData _locationResult = await location.getLocation();
+  //     await FirebaseFirestore.instance.collection('location').doc('user1').set({
+  //       'latitude': _locationResult.latitude,
+  //       'longitude': _locationResult.longitude,
+  //       'name': 'john'
+  //     }, SetOptions(merge: true));
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  Future<void> _listenLocation() async {
+    _locationSubscription = location.onLocationChanged.handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      setState(() {
+        _locationSubscription = null;
+      });
+    }).listen((loc.LocationData currentlocation) async {
+      await FirebaseFirestore.instance.collection('location').doc('user1').set({
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
+        'name': 'john'
+      }, SetOptions(merge: true));
+    });
+  }
+
+  _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final loc.Location location = loc.Location();
+  StreamSubscription<loc.LocationData>? _locationSubscription;
+
+  @override
+  void initState() {
+    // getDocId();
+    super.initState();
+    _requestPermission();
+    location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
+    location.enableBackgroundMode(enable: true);
+  }
+
+  Future<void> _listenLocation() async {
+    _locationSubscription = location.onLocationChanged.handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      setState(() {
+        _locationSubscription = null;
+      });
+    }).listen((loc.LocationData currentlocation) async {
+      await FirebaseFirestore.instance.collection('location').doc('user1').set({
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
+        'name': 'john'
+      }, SetOptions(merge: true));
+    });
+  }
+
+  _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +158,12 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   child: Image.asset('assets/Group.png'),
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  onTap: () {
+                    _listenLocation();
+                  },
                 ),
               ],
             ),
