@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'vault.dart';
+import 'people_you_know.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -329,6 +330,13 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   children: <Widget>[
                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DraggableApp()),
+                        );
+                      },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10.0, right: 24.0),
                         child: Container(
