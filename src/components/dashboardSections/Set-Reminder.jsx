@@ -90,7 +90,7 @@ const SetReminder = (props) => {
         <ToastContainer />
         <Title className="mb-16 mt-8">Set Reminders</Title>
         {loading ? (
-          <Loader color="gray" className="self-center" />
+          <Loader color="blue" className="self-center" />
         ) : (
           <ShowReminders reminderData={reminderData} />
         )}

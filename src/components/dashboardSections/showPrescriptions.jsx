@@ -1,6 +1,13 @@
-import { IconBrightness, IconHaze, IconMoon, IconPills } from "@tabler/icons";
+import {
+  IconBrightness,
+  IconHaze,
+  IconMoon,
+  IconPills,
+  IconX,
+  IconEdit,
+} from "@tabler/icons";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PrescriptionElement from "../prescription-element";
 import {
   Card,
@@ -11,6 +18,7 @@ import {
   Stack,
   ActionIcon,
 } from "@mantine/core";
+import { PrescriptionContext } from "./Update-Prescription";
 
 const MotionPrescriptionElement = motion(PrescriptionElement);
 
@@ -108,6 +116,8 @@ const CardComponent = ({ card, onSelect }) => {
 const ShowPrescriptions = (props) => {
   const [selectedCard, setSelectedCard] = useState(null);
   const prescriptionData = [...props.prescriptionData];
+  const { currentPrescription, setCurrentPrescription } =
+    useContext(PrescriptionContext);
 
   return (
     <MotionConfig
@@ -130,10 +140,7 @@ const ShowPrescriptions = (props) => {
       </ScrollArea>
       <AnimatePresence>
         {selectedCard && (
-          <motion.div
-            className="absolute top-1/3 left-0 z-30 w-full"
-            onClick={() => setSelectedCard(null)}
-          >
+          <motion.div className="absolute top-1/3 left-0 z-30 w-full">
             <MotionPrescriptionElement
               layoutId={`card_${selectedCard.id}`}
               key={selectedCard.id}
@@ -143,10 +150,10 @@ const ShowPrescriptions = (props) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
-                className="flexj justify-between items-center text-black py-4"
+                className="flex justify-center items-center text-black py-4"
               >
-                <motion.div className="flex justify-between items-center gap-2 w-full">
-                  <motion.div className="flex items-center gap-4">
+                <motion.div className="flex justify-between items-center gap-2 p-4">
+                  <motion.div className="flex items-start gap-4">
                     <ThemeIcon
                       color="white"
                       radius="xl"
@@ -160,38 +167,117 @@ const ShowPrescriptions = (props) => {
                       <motion.h1
                         transition={{ layout: { duration: 0.9 } }}
                         layoutId={`card_title_${selectedCard.id}`}
-                        className="text-2xl font-poppins p-0 m-0 font-semibold"
+                        className="text-3xl font-poppins p-0 m-0 font-semibold flex items-center"
                       >
-                        {selectedCard.name}
+                        Medicine Prescribed: {"  "}
+                        {
+                          <Text
+                            color="blue"
+                            className="text-3xl font-poppins ml-1"
+                          >
+                            {selectedCard.name}
+                          </Text>
+                        }
                       </motion.h1>
                       <motion.h2
                         layout="position"
                         transition={{ layout: { duration: 0.2 } }}
                         layoutId={`card_date_${selectedCard.id}`}
-                        className="text-base m-0 p-0 font-poppins font-normal"
+                        className="text-1xl m-0 p-0 font-poppins font-normal flex items-center"
                       >
-                        Tenure: {selectedCard.tenure} | Disease:{" "}
-                        {selectedCard.disease}
+                        Tenure: {"  "}
+                        {
+                          <Text
+                            color="blue"
+                            className="text-1xl font-poppins ml-1"
+                          >
+                            {selectedCard.tenure}
+                          </Text>
+                        }
+                      </motion.h2>
+                      <motion.h2
+                        layout="position"
+                        transition={{ layout: { duration: 0.2 } }}
+                        layoutId={`card_date_${selectedCard.id}`}
+                        className="text-1xl m-0 p-0 font-poppins font-normal flex items-centerx"
+                      >
+                        Disease: {"  "}
+                        {
+                          <Text
+                            color="blue"
+                            className="text-1xl font-poppins ml-1"
+                          >
+                            {selectedCard.disease}
+                          </Text>
+                        }
                       </motion.h2>
                     </motion.div>
                   </motion.div>
-                  <motion.div className="flex items-end justify-evenly gap-9 py-0 pr-4">
-                    <ThemeIcon color="white" className="text-black" size="xl">
-                      <IconHaze size="xl" />
-                    </ThemeIcon>
-                    <ThemeIcon color="white" className="text-black" size="xl">
-                      <IconBrightness size="xl" />
-                    </ThemeIcon>
-                    <ThemeIcon color="white" className="text-black" size="xl">
-                      <IconMoon size="xl" />
-                    </ThemeIcon>
-                  </motion.div>
                 </motion.div>
+                <motion.div className="flex-auto font-poppins">
+                  <motion.ul className="flex flex-col items-center">
+                    <div className="flex flex-col items-start">
+                      <motion.h2>Dosage</motion.h2>
+                      <motion.li className="flex text-lg">
+                        Morning:{" "}
+                        {
+                          <Text className="ml-1 text-dark-blue font-bold">
+                            {selectedCard.dosage.morning}
+                          </Text>
+                        }
+                      </motion.li>
+                      <motion.li className="flex text-lg">
+                        Afternoon:{" "}
+                        {
+                          <Text className="ml-1 text-dark-blue font-bold">
+                            {selectedCard.dosage.afternoon}
+                          </Text>
+                        }
+                      </motion.li>
+                      <motion.li className="flex text-lg">
+                        Night:{" "}
+                        {
+                          <Text className="ml-1 text-dark-blue font-bold">
+                            {selectedCard.dosage.night}
+                          </Text>
+                        }
+                      </motion.li>
+                    </div>
+                  </motion.ul>
+                </motion.div>
+              </motion.div>
+              <motion.div className="flex gap-2 w-full justify-end">
+                <ActionIcon
+                  radius="xl"
+                  variant="filled"
+                  size="xl"
+                  onClick={() => setCurrentPrescription(selectedCard)}
+                >
+                  {<IconEdit />}
+                </ActionIcon>
+                <ActionIcon
+                  onClick={() => setSelectedCard(null)}
+                  className=""
+                  color="gray"
+                  radius="xl"
+                  variant="filled"
+                  size="xl"
+                >
+                  {<IconX />}
+                </ActionIcon>
               </motion.div>
             </MotionPrescriptionElement>
           </motion.div>
         )}
       </AnimatePresence>
+      {selectedCard && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.8 }}
+          transition={{ duration: 0.4 }}
+          className="w-screen h-screen bg-white absolute top-0 left-0 opacity-80"
+        ></motion.div>
+      )}
     </MotionConfig>
   );
 };

@@ -23,7 +23,7 @@ function App() {
         {isLoggedIn ? (
           <>
             <Route path="/dashboard" element={<Dashboard />}>
-              <Route path={"/dashboard"} element={<Text>Dashboard</Text>} />
+              <Route path={"/dashboard/"} element={<Text>Dashboard</Text>} />
               <Route
                 path={"/dashboard/live-location"}
                 element={<LiveLocation />}

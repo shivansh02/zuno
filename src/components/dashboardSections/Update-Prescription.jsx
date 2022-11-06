@@ -4,6 +4,7 @@ import {
   collection,
   getDoc,
   getDocs,
+  updateDoc,
   setDoc,
   DocumentSnapshot,
   doc,
@@ -14,6 +15,7 @@ import { Title, ScrollArea, Text, Loader } from "@mantine/core";
 import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import ShowPrescriptions from "./showPrescriptions";
+import AddPrescription from "./Add-Prescription";
 
 // Firebase fetching
 const firebaseConfig = {
@@ -27,12 +29,72 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+export const PrescriptionContext = React.createContext();
 
 const UpdatePrescription = () => {
   const [prescriptionData, setPrescriptionData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [currentPrescription, setCurrentPrescription] = useState({
+    name: "",
+    disease: "",
+    dosage: {
+      morning: 0,
+      afternoon: 0,
+      night: 0,
+    },
+    tenure: "",
+  });
+
+  const value = { currentPrescription, setCurrentPrescription };
+
   const notify = () => toast("✅Prescription Added!");
+
+  const updateAPrescription = async (values, docID) => {
+    const docRef = doc(db, "prescriptions", `${docID}`);
+    await updateDoc(docRef, {
+      name: values.name,
+      disease: values.disease,
+      tenure: values.tenure,
+      dosage: {
+        morning: values.dosage.morning,
+        afternoon: values.dosage.afternoon,
+        night: values.dosage.night,
+      },
+    });
+  };
+
+  const fillUpdateFields = (values) => {
+    setCurrentPrescription(values);
+  };
+
+  const addPrescription = async (values) => {
+    const docRef = await addDoc(collection(db, "prescriptions"), {
+      name: values.name,
+      disease: values.disease,
+      tenure: values.tenure,
+      dosage: {
+        morning: values.dosage.morning,
+        afternoon: values.dosage.afternoon,
+        night: values.dosage.night,
+      },
+    });
+    const newPrescription = {
+      name: values.name,
+      disease: values.disease,
+      tenure: values.tenure,
+      dosage: {
+        morning: values.dosage.morning,
+        afternoon: values.dosage.afternoon,
+        night: values.dosage.night,
+        id: docRef.id,
+      },
+    };
+    console.log(values);
+    console.log("Document written with ID: ", docRef.id);
+    setPrescriptionData((oldArray) => [newPrescription, ...oldArray]);
+    notify();
+  };
 
   useEffect(() => {
     (async () => {
@@ -50,16 +112,30 @@ const UpdatePrescription = () => {
 
   return (
     <>
-      <div className="px-7 font-poppins flex flex-col w-full">
-        {/* Reminder Window */}
-        <ToastContainer />
-        <Title className="mb-16 mt-8">Prescriptions</Title>
-      </div>
-      {loading ? (
-        <Loader color="gray" className="self-center" />
-      ) : (
-        <ShowPrescriptions prescriptionData={prescriptionData} />
-      )}
+      <PrescriptionContext.Provider value={value}>
+        <div className="px-7 font-poppins flex flex-col w-full">
+          {/* Reminder Window */}
+          <ToastContainer />
+          <Title className="mb-16 mt-8">Prescriptions</Title>
+
+          {loading ? (
+            <Loader color="orange" className="self-center" />
+          ) : (
+            <ShowPrescriptions
+              prescriptionData={prescriptionData}
+              fillUpdateFields={fillUpdateFields}
+            />
+          )}
+          <div className="mt-12">
+            <Title className="mb-12">Add New Prescription</Title>
+
+            <AddPrescription
+              addPrescription={addPrescription}
+              updatePrescription={updateAPrescription}
+            />
+          </div>
+        </div>
+      </PrescriptionContext.Provider>
     </>
   );
 };

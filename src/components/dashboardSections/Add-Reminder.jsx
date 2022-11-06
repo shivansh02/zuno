@@ -43,7 +43,7 @@ const AddReminder = ({ addReminder }) => {
         <form
           onSubmit={addForm.onSubmit((values) => {
             addReminder(values);
-            addForm.reset();
+            addForm.resetDirty();
             addForm.resetTouched();
           })}
           className="flex flex-col font-poppins border-8 overflow-y-visible gap-4 h-max justify-center"
@@ -66,6 +66,7 @@ const AddReminder = ({ addReminder }) => {
           <div className="flex justify-around items-center gap-4">
             <DatePicker
               placeholder="Pick Date"
+              dropdownType="modal"
               radius="lg"
               size="lg"
               className="flex-1"
