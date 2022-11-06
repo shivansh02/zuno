@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -150,37 +152,41 @@ class _ImageUploadsState extends State<ImageUploads> {
                     children: [
                       SizedBox(
                         width: MediaQuery.of(context).size.width * .85,
-                        child: TextField(
-                          controller: dateController,
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.calendar_today_rounded),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.teal),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 10),
+                          child: TextField(
+                            controller: dateController,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.calendar_today_rounded),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                borderSide:
+                                    BorderSide(width: 2, color: Colors.teal),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                borderSide:
+                                    BorderSide(width: 2, color: Colors.teal),
+                              ),
+                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.all(20),
+                              labelText: "Select date",
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.teal),
-                            ),
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.all(20),
-                            labelText: "Select date",
+                            onTap: () async {
+                              DateTime? selectedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2050));
+                              if (selectedDate != null) {
+                                dateController.text = DateFormat('yyyy-MM-dd')
+                                    .format(selectedDate);
+                              }
+                            },
                           ),
-                          onTap: () async {
-                            DateTime? selectedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2050));
-                            if (selectedDate != null) {
-                              dateController.text =
-                                  DateFormat('yyyy-MM-dd').format(selectedDate);
-                            }
-                          },
                         ),
                       ),
                     ],
@@ -192,7 +198,7 @@ class _ImageUploadsState extends State<ImageUploads> {
                           child: TextField(
                             controller: timeController,
                             decoration: const InputDecoration(
-                                icon: Icon(Icons.timer),
+                                prefixIcon: Icon(Icons.timer),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30)),
@@ -269,30 +275,25 @@ class _ImageUploadsState extends State<ImageUploads> {
                       )),
                   Padding(
                       padding: const EdgeInsets.only(top: 30),
-                      child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.teal,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.done,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              uploadFile();
-                              if (formKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text("User added successfully")));
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RemindersApp()),
-                                    (Route<dynamic> route) => false);
-                              }
-                            },
-                          )))
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF7A87FB),
+                            textStyle: TextStyle(fontSize: 30)),
+                        child: const Text("Set Reminder"),
+                        onPressed: () {
+                          uploadFile();
+                          if (formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text("User added successfully")));
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const RemindersApp()),
+                                (Route<dynamic> route) => false);
+                          }
+                        },
+                      ))
                 ],
               ),
             ]),
