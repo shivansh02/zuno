@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.0.4
   flutter_speed_dial: ^6.2.0
   draggable_home: ^1.0.4
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

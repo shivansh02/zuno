@@ -1,11 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'data_class.dart';
-import 'package:draggable_home/draggable_home.dart';
 import 'data_class_rem.dart';
+import 'package:draggable_home/draggable_home.dart';
+import 'reminder_form.dart';
 
 const purple = Color.fromRGBO(122, 135, 251, 1);
 const lightBlue = Color.fromRGBO(220, 231, 253, 1);
@@ -61,7 +57,10 @@ class _ReminderState extends State<Reminder> {
       backgroundColor: Colors.white,
       appBarColor: purple,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => const ImageUploads()));
+        },
         child: const Icon(Icons.add),
         backgroundColor: purple,
       ),
@@ -78,13 +77,6 @@ class _ReminderState extends State<Reminder> {
           onPressed: () => {
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => RemindersApp())),
-
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             const HomePage()), // this mainpage is your page to refresh
-            //     (Route<dynamic> route) => false)
           },
           icon: const Icon(Icons.refresh),
           color: Colors.white,
