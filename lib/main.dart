@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:testing/reminders.dart';
 import 'vault.dart';
 import 'people_you_know.dart';
 
@@ -195,6 +196,13 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RemindersApp()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 24.0),
                     child: Container(
@@ -268,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.white,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "Brain Games",
                             style: TextStyle(
                                 color: Colors.white,
