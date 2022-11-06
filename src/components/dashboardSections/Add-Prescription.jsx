@@ -128,15 +128,6 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
               >
                 <IconPlus />
               </ActionIcon>
-              <ActionIcon
-                radius="lg"
-                variant="filled"
-                color="blue"
-                size="xl"
-                type="submit"
-              >
-                <IconUpload />
-              </ActionIcon>
             </motion.div>
           </div>
         </form>

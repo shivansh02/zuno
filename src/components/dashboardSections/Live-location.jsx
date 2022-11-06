@@ -6,6 +6,7 @@ import {
   Popup,
   useMapEvent,
   Tooltip,
+  Circle,
 } from "react-leaflet";
 import { Title } from "@mantine/core";
 import { Icon } from "leaflet";
@@ -54,6 +55,12 @@ const LiveLocation = (props) => {
     longitude: 77.5731302,
   });
 
+  let circleOptions = {
+    color: "blue",
+    fillColor: "#f03",
+    fillOpacity: 0.5,
+  };
+
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "location", "user1"), (doc) => {
       const location = doc.data();
@@ -75,7 +82,7 @@ const LiveLocation = (props) => {
       {currentLocation && (
         <MapContainer
           center={[currentLocation.latitude, currentLocation.longitude]}
-          zoom={12}
+          zoom={13}
           scrollWheelZoom={false}
           className="w-full h-2/3 rounded-3xl"
         >
@@ -87,9 +94,23 @@ const LiveLocation = (props) => {
             // if position changes, marker will drift its way to new position
             position={[currentLocation.latitude, currentLocation.longitude]}
             // time in ms that marker will take to reach its destination
+            keepAtCenter={true}
             duration={1000}
           >
             <Popup>Ramanda</Popup>
+            <Circle
+              center={{
+                lat: currentLocation.latitude,
+                lng: currentLocation.longitude,
+                distanceTo: [
+                  currentLocation.latitude,
+                  currentLocation.longitude,
+                ],
+              }}
+              color="green"
+              radius={300}
+              fillOpacity={0.5}
+            ></Circle>
           </ReactLeafletDriftMarker>
         </MapContainer>
       )}

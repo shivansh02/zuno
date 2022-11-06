@@ -140,7 +140,7 @@ const ShowPrescriptions = (props) => {
       </ScrollArea>
       <AnimatePresence>
         {selectedCard && (
-          <motion.div className="absolute top-1/3 left-0 z-30 w-full">
+          <motion.div className="absolute top-1/4 left-0 z-30 w-full">
             <MotionPrescriptionElement
               layoutId={`card_${selectedCard.id}`}
               key={selectedCard.id}
