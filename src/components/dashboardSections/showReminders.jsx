@@ -80,7 +80,7 @@ const CardComponent = ({ card, onSelect }) => {
               layout="position"
               transition={{ layout: { duration: 0.2 } }}
               layoutId={`card_time_${card.id}`}
-              className="text-base m-0 p-0"
+              className="text-base m-0 p-0 self-end"
             >
               {card.time}
             </motion.h3>

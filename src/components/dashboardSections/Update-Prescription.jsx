@@ -11,7 +11,7 @@ import {
   onSnapshot,
   addDoc,
 } from "firebase/firestore";
-import { Title, ScrollArea, Text, Loader } from "@mantine/core";
+import { Title, Loader } from "@mantine/core";
 import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import ShowPrescriptions from "./showPrescriptions";
@@ -49,6 +49,7 @@ const UpdatePrescription = () => {
   const value = { currentPrescription, setCurrentPrescription };
 
   const notify = () => toast("✅Prescription Added!");
+  const notify2 = () => toast("👍Prescription Updated!");
 
   const updateAPrescription = async (values, docID) => {
     const docRef = doc(db, "prescriptions", `${docID}`);
@@ -62,6 +63,7 @@ const UpdatePrescription = () => {
         night: values.dosage.night,
       },
     });
+    notify2();
   };
 
   const fillUpdateFields = (values) => {

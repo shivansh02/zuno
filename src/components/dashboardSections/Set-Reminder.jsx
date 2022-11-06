@@ -43,7 +43,8 @@ const SetReminder = (props) => {
 
   const addReminder = async (values) => {
     let time = values.time.toLocaleString();
-    const formatedDate = dateFormat(time, "dS mmmm yyyy");
+    let date = values.date.toLocaleString();
+    const formatedDate = dateFormat(date, "dS mmmm yyyy");
     const formatedTime = dateFormat(time, "h:mm TT");
     console.log("data", values);
 
@@ -90,7 +91,7 @@ const SetReminder = (props) => {
         <ToastContainer />
         <Title className="mb-16 mt-8">Set Reminders</Title>
         {loading ? (
-          <Loader color="gray" className="self-center" />
+          <Loader color="blue" className="self-center" />
         ) : (
           <ShowReminders reminderData={reminderData} />
         )}

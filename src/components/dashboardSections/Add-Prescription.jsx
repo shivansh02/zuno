@@ -53,16 +53,15 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
       <div className="p-2">
         <form
           onSubmit={addForm.onSubmit((values) => {
+            console.log("creating");
+            console.log(values);
+
             if (!updateMethod) {
               console.log("creating");
               addPrescription(values);
-              addForm.reset();
-              addForm.resetTouched();
             } else {
               console.log("updating");
               updatePrescription(values, currentPrescription.id);
-              addForm.reset();
-              addForm.resetTouched();
             }
           })}
           className="flex flex-col font-poppins border-8 overflow-y-visible gap-4 h-max justify-center"
@@ -127,6 +126,15 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
                 type="submit"
               >
                 <IconPlus />
+              </ActionIcon>
+              <ActionIcon
+                radius="lg"
+                variant="filled"
+                color="blue"
+                size="xl"
+                type="submit"
+              >
+                <IconUpload />
               </ActionIcon>
             </motion.div>
           </div>

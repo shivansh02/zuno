@@ -19,6 +19,7 @@ const AddReminder = ({ addReminder }) => {
       title: "",
       description: "",
       date: Date,
+      time: Date,
       priority: "",
     },
     validate: {
@@ -42,9 +43,10 @@ const AddReminder = ({ addReminder }) => {
       <div className="p-2">
         <form
           onSubmit={addForm.onSubmit((values) => {
+            console.log("submitted");
+            console.log(values);
             addReminder(values);
             addForm.resetDirty();
-            addForm.resetTouched();
           })}
           className="flex flex-col font-poppins border-8 overflow-y-visible gap-4 h-max justify-center"
         >
@@ -81,7 +83,7 @@ const AddReminder = ({ addReminder }) => {
               radius="lg"
               clearable
               className="flex-1"
-              {...addForm.getInputProps("date")}
+              {...addForm.getInputProps("time")}
             />
           </div>
           <div className="flex items-center self-end gap-4">
