@@ -11,7 +11,6 @@ import SetReminder from "./components/dashboardSections/Set-Reminder";
 import Testing from "./components/dashboardSections/testingSec";
 import UpdatePrescription from "./components/dashboardSections/Update-Prescription";
 import MonitorPerformance from "./components/dashboardSections/MonitorPerformance";
-import LiveLocationTest from "./components/dashboardSections/LiveLocationTest";
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(true);
@@ -24,8 +23,11 @@ function App() {
         <Route path="/connect-app" element={<ConnectWithAppPage />} />
         {isLoggedIn ? (
           <>
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route path={"/dashboard/"} element={<Text>Dashboard</Text>} />
+            <Route
+              className="text-2xl text-light-blue"
+              path="/dashboard"
+              element={<Dashboard />}
+            >
               <Route
                 path={"/dashboard/live-location"}
                 element={<LiveLocation />}

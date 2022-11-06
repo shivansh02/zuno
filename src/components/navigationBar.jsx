@@ -32,7 +32,7 @@ import {
   IconChevronLeft,
 } from "@tabler/icons";
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/M.png";
+import Logo from "../assets/Z.png";
 import ProfileImage from "../assets/image 7.png";
 import { IconSearch } from "@tabler/icons";
 
@@ -47,11 +47,11 @@ const NavigationPane = (props) => {
       <div>
         <div className="flex justify-between items-center mt-16">
           <div className="flex items-center gap-2">
-            <ThemeIcon color="white" radius="xl" size="xl">
-              <Image src={Logo} className="w-full h-full p-1" />
+            <ThemeIcon color="white" radius="xl" size="xl" className="flex">
+              <Image src={Logo} className="w-full h-full p-2" />
             </ThemeIcon>
             <Text weight={600} color="white" size="xl" className="font-poppins">
-              MemoryBox
+              Zuno
             </Text>
           </div>
           <IconSearch color="white" size={30} />

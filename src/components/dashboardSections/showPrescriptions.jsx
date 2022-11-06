@@ -251,7 +251,9 @@ const ShowPrescriptions = (props) => {
                   radius="xl"
                   variant="filled"
                   size="xl"
-                  onClick={() => setCurrentPrescription(selectedCard)}
+                  onClick={() => {
+                    setCurrentPrescription(selectedCard);
+                  }}
                 >
                   {<IconEdit />}
                 </ActionIcon>

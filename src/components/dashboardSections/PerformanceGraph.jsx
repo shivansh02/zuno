@@ -57,7 +57,7 @@ const PerformanceGraph = ({ performanceData }) => {
       <Text size="xl" className="text-3xl font-poppins">
         Performance Graph
       </Text>
-      <Line options={options} data={data} />;
+      <Line options={options} data={data} className="w-5/6" />;
     </Card>
   );
 };

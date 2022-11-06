@@ -51,9 +51,6 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
       <div className="p-2">
         <form
           onSubmit={addForm.onSubmit((values) => {
-            console.log("creating");
-            console.log(values);
-
             if (!updateMethod) {
               console.log("creating");
               addPrescription(values);

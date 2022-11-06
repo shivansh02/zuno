@@ -57,7 +57,7 @@ const LiveLocation = (props) => {
 
   const [currentLocation, setCurrentLocation] = useState({
     latitude: 28.7330199,
-    longitude: 77.5731302,
+    longitude: 77.1188811,
   });
 
   let circleCenter = {
@@ -119,7 +119,7 @@ const LiveLocation = (props) => {
       {currentLocation && (
         <MapContainer
           center={[currentLocation.latitude, currentLocation.longitude]}
-          zoom={13}
+          zoom={18}
           scrollWheelZoom={false}
           className="w-full h-2/3 rounded-3xl"
         >
@@ -132,6 +132,7 @@ const LiveLocation = (props) => {
             draggable
             position={[currentLocation.latitude, currentLocation.longitude]}
             duration={1000}
+            keepAtCenter
           >
             <Popup>Popup</Popup>
           </ReactLeafletDriftMarker>
