@@ -11,6 +11,7 @@ import SetReminder from "./components/dashboardSections/Set-Reminder";
 import Testing from "./components/dashboardSections/testingSec";
 import UpdatePrescription from "./components/dashboardSections/Update-Prescription";
 import MonitorPerformance from "./components/dashboardSections/MonitorPerformance";
+import LiveLocationTest from "./components/dashboardSections/LiveLocationTest";
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(true);

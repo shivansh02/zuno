@@ -33,8 +33,6 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
   });
 
   useEffect(() => {
-    // addForm.values.name = currentPrescription.name;
-    // addForm.values.disease = c
     addForm.setValues({
       name: currentPrescription.name,
       disease: currentPrescription.disease,
@@ -61,6 +59,7 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
               addPrescription(values);
             } else {
               console.log("updating");
+              console.log(currentPrescription.id);
               updatePrescription(values, currentPrescription.id);
             }
           })}
@@ -126,15 +125,6 @@ const AddPrescription = ({ addPrescription, updatePrescription }) => {
                 type="submit"
               >
                 <IconPlus />
-              </ActionIcon>
-              <ActionIcon
-                radius="lg"
-                variant="filled"
-                color="blue"
-                size="xl"
-                type="submit"
-              >
-                <IconUpload />
               </ActionIcon>
             </motion.div>
           </div>
