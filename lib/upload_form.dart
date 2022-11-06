@@ -10,6 +10,8 @@ import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testing/people_you_know.dart';
 
+const purple = Color.fromRGBO(122, 135, 251, 1);
+
 class ImageUploads extends StatefulWidget {
   const ImageUploads({Key? key}) : super(key: key);
 
@@ -96,7 +98,7 @@ class _ImageUploadsState extends State<ImageUploads> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: purple,
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -109,7 +111,7 @@ class _ImageUploadsState extends State<ImageUploads> {
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     height: 5,
-                    color: Colors.teal),
+                    color: purple),
                 textAlign: TextAlign.start,
               ),
               Center(
@@ -165,14 +167,12 @@ class _ImageUploadsState extends State<ImageUploads> {
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.teal),
+                              borderSide: BorderSide(width: 2, color: purple),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.teal),
+                              borderSide: BorderSide(width: 2, color: purple),
                             ),
                             border: OutlineInputBorder(),
                             labelText: 'Name',
@@ -197,14 +197,12 @@ class _ImageUploadsState extends State<ImageUploads> {
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.teal),
+                              borderSide: BorderSide(width: 2, color: purple),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.teal),
+                              borderSide: BorderSide(width: 2, color: purple),
                             ),
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.all(20),
