@@ -121,7 +121,7 @@ class _ImageUploadsState extends State<ImageUploads> {
                   },
                   child: CircleAvatar(
                     radius: 55,
-                    backgroundColor: Colors.teal,
+                    backgroundColor: purple,
                     child: _photo != null
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(50),
@@ -214,7 +214,7 @@ class _ImageUploadsState extends State<ImageUploads> {
                       padding: const EdgeInsets.only(top: 30),
                       child: CircleAvatar(
                           radius: 30,
-                          backgroundColor: Colors.teal,
+                          backgroundColor: purple,
                           child: IconButton(
                             icon: const Icon(
                               Icons.done,
@@ -225,13 +225,12 @@ class _ImageUploadsState extends State<ImageUploads> {
                               if (formKey.currentState!.validate()) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content:
-                                            Text("User added successfully")));
+                                        content: Text("Uploading...")));
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DraggableApp()), // this mainpage is your page to refresh
+                                            const DraggableApp()),
                                     (Route<dynamic> route) => false);
                               }
                             },

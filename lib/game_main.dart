@@ -13,13 +13,12 @@ const purple = Color.fromRGBO(122, 135, 251, 1);
 class GameApp extends StatelessWidget {
   const GameApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'MemoryGame',
       debugShowCheckedModeBanner: false,
-      home: const Game(),
+      home: Game(),
     );
   }
 }
@@ -65,10 +64,8 @@ class _GameState extends State<Game> {
     myPairs.shuffle();
 
     gridViewTiles = myPairs;
-    Future.delayed(const Duration(seconds: 5), () {
-// Here you can write your code
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        // Here you can write your code for open new view
         questionPairs = getQuestionPairs();
         gridViewTiles = questionPairs;
         gridViewTiles.length = level;
@@ -151,7 +148,6 @@ class _GameState extends State<Game> {
                               const BorderRadius.all(Radius.circular(20))),
                       child: GridView(
                         shrinkWrap: true,
-                        //physics: ClampingScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             mainAxisSpacing: 0.0,
@@ -261,7 +257,6 @@ class _TileState extends State<Tile> {
             myPairs[widget.tileIndex].setIsSelected(true);
           });
           if (selectedTile != "") {
-            /// testing if the selected tiles are same
             if (selectedTile == myPairs[widget.tileIndex].getImageAssetPath()) {
               points = points + 100;
 

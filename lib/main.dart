@@ -30,7 +30,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // getDocId();
     super.initState();
     _requestPermission();
     location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
@@ -49,19 +48,6 @@ class _MyAppState extends State<MyApp> {
       home: const HomePage(),
     );
   }
-
-  // _getLocation() async {
-  //   try {
-  //     final loc.LocationData _locationResult = await location.getLocation();
-  //     await FirebaseFirestore.instance.collection('location').doc('user1').set({
-  //       'latitude': _locationResult.latitude,
-  //       'longitude': _locationResult.longitude,
-  //       'name': 'john'
-  //     }, SetOptions(merge: true));
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   Future<void> _listenLocation() async {
     _locationSubscription = location.onLocationChanged.handleError((onError) {
@@ -213,9 +199,10 @@ class _HomePageState extends State<HomePage> {
                           color: const Color(0xFF7A87FB),
                           boxShadow: const [
                             BoxShadow(
-                                color: Color(0xFF7A87FB),
-                                spreadRadius: 3,
-                                blurRadius: 11)
+                                color: Color.fromARGB(200, 122, 135, 251),
+                                offset: Offset(4, 4),
+                                spreadRadius: 5,
+                                blurRadius: 20)
                           ]),
                       width: (screenWidth / 2.46),
                       height: (screenHeight / 5.34),
@@ -231,22 +218,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 0),
+                            padding: EdgeInsets.only(bottom: 5),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
                             child: Text(
-                              "Set new",
+                              "Reminders",
                               style: TextStyle(
+                                  height: 1,
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600),
                             ),
-                          ),
-                          Text(
-                            "Reminders",
-                            style: TextStyle(
-                                height: 1,
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600),
                           )
                         ],
                       ),
@@ -276,10 +259,15 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Image.asset(
-                              'assets/Vector.png',
-                              color: Colors.white,
+                            padding: const EdgeInsets.only(top: 5, bottom: 10),
+                            child: Center(
+                              child: SizedBox(
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/Vector.png',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                           const Text(
@@ -327,7 +315,9 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Image.asset('assets/vault.png'),
+                            child: SizedBox(
+                                height: 50,
+                                child: Image.asset('assets/vault.png')),
                           ),
                           const Text(
                             "Your Vault",
@@ -357,20 +347,17 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(62.0),
                               color: const Color(0xFF7A87FB),
-                              boxShadow: const [
-                                // BoxShadow(
-                                //     color: Color(0xFF7A87FB),
-                                //     spreadRadius: 3,
-                                //     blurRadius: 11)
-                              ]),
+                              boxShadow: const []),
                           width: (screenWidth / 2.54),
                           height: (screenHeight / 8.83),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: const [
                               Center(
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      top: 30, bottom: 36, left: 17.67),
+                                      top: 0, bottom: 0, left: 0),
                                   child: Icon(
                                     Icons.supervisor_account,
                                     size: 39.33,
@@ -381,10 +368,12 @@ class _HomePageState extends State<HomePage> {
                               Center(
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      top: 24.0, bottom: 19, left: 12.0),
+                                      top: 0.0, bottom: 0, left: 4.0),
                                   child: Text(
                                     "    People\nYou Know",
+                                    textAlign: TextAlign.left,
                                     style: TextStyle(
+                                        height: 1.3,
                                         color: Colors.white,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600),
@@ -410,16 +399,25 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(62.0),
                               color: const Color(0xFFFEE5B2),
-                              boxShadow: const []),
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(200, 254, 229, 178),
+                                    offset: Offset(4, 4),
+                                    spreadRadius: 5,
+                                    blurRadius: 20)
+                              ]),
                           width: (screenWidth / 2.54),
                           height: (screenHeight / 10.6),
                           child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: Image.asset('assets/pills.png'),
+                                padding:
+                                    const EdgeInsets.only(top: 0, bottom: 0),
+                                child: SizedBox(
+                                    height: 35,
+                                    child: Image.asset('assets/pills.png')),
                               ),
                               const Text(
                                 "Meds",
