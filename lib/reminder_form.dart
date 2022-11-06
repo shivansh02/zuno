@@ -24,6 +24,7 @@ class _ImageUploadsState extends State<ImageUploads> {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
   DateTime selectedDate = DateTime.now();
+
   List<String> list = ['High', 'Mid', 'Low'];
   String? selectedPrio = 'Low';
 
@@ -47,6 +48,11 @@ class _ImageUploadsState extends State<ImageUploads> {
     }
   }
 
+  void initState() {
+    timeController.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -63,12 +69,10 @@ class _ImageUploadsState extends State<ImageUploads> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           backgroundColor: const Color(0xFF7A87FB),
-          title: Center(
-            child: Text(
-              "Add Reminder",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+          title: Text(
+            "Add Reminder",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -277,8 +281,11 @@ class _ImageUploadsState extends State<ImageUploads> {
                       padding: const EdgeInsets.only(top: 30),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            padding: EdgeInsets.all(10),
                             backgroundColor: Color(0xFF7A87FB),
-                            textStyle: TextStyle(fontSize: 30)),
+                            textStyle: TextStyle(fontSize: 20)),
                         child: const Text("Set Reminder"),
                         onPressed: () {
                           uploadFile();

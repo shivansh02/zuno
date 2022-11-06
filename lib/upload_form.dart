@@ -77,7 +77,7 @@ class _ImageUploadsState extends State<ImageUploads> {
         'name': nameController.text,
         'relationship': relController.text,
         'url':
-            'https://firebasestorage.googleapis.com/v0/b/hacky-e0462.appspot.com/o/files%2F$fileName?alt=media&token=9acfbca4-da88-45a8-8e53-bbfba9b111d6',
+            'https://firebasestorage.googleapis.com/v0/b/hacky-e0462.appspot.com/o/files%2F$fileName?alt=media&token=d98c1389-68be-43ff-8c88-029c0bd87043',
       });
 
       message = 'User added successfully';
