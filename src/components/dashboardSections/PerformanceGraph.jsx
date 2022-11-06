@@ -53,7 +53,7 @@ const PerformanceGraph = ({ performanceData }) => {
     ],
   };
   return (
-    <Card withBorder shadow="xl" radius="lg">
+    <Card withBorder shadow="xl" radius="lg" className="p-4">
       <Text size="xl" className="text-3xl font-poppins">
         Performance Graph
       </Text>
