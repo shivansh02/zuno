@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       title: const Text(
-        "Family Members",
+        "People you know",
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       actions: [
