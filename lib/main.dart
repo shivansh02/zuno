@@ -1,6 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
+import 'data_class_rem.dart';
+
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:location/location.dart' as loc;
@@ -10,6 +14,11 @@ import 'vault.dart';
 import 'people_you_know.dart';
 import 'prescriptions.dart';
 import 'game_main.dart';
+
+const purple = Color.fromRGBO(122, 135, 251, 1);
+const lightBlue = Color.fromRGBO(220, 231, 253, 1);
+const yellow = Color.fromRGBO(240, 187, 82, 1);
+const lightYellow = Color.fromRGBO(254, 229, 178, 1);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,6 +96,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
+  List dataList = [];
 
   @override
   void initState() {
@@ -123,6 +133,65 @@ class _HomePageState extends State<HomePage> {
       openAppSettings();
     }
   }
+
+  FutureBuilder getAllData() {
+    return FutureBuilder(
+      future: FireStoreDbRem().getData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text(
+            "Something went wrong",
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          dataList = snapshot.data as List;
+          return listView(dataList);
+        }
+        return const Center(
+            child: CircularProgressIndicator(
+          color: yellow,
+        ));
+      },
+    );
+  }
+
+  ListView listView(dataList) => ListView.builder(
+      padding: const EdgeInsets.only(top: 0, right: 10, left: 10),
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: 3,
+      shrinkWrap: true,
+      itemBuilder: (context, index) => Card(
+            margin: const EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            color: dataList[index]["priority"] == "low"
+                ? lightBlue
+                : dataList[index]["priority"] == "high"
+                    ? const Color(0xFFFEE0DF)
+                    : lightYellow,
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(20),
+              title: Text(
+                dataList[index]["title"],
+                style: const TextStyle(
+                    color: Colors.black87,
+                    height: 1.5,
+                    fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                dataList[index]["description"],
+                style: const TextStyle(color: Colors.black54),
+              ),
+              trailing: Text(
+                dataList[index]["time"],
+                style: const TextStyle(
+                    color: Colors.black87,
+                    height: 1.5,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ));
 
   @override
   Widget build(BuildContext context) {
@@ -218,10 +287,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(bottom: 5),
+                            padding: EdgeInsets.only(bottom: 0),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 8.0),
+                            padding: EdgeInsets.only(top: 6.0),
                             child: Text(
                               "Reminders",
                               style: TextStyle(
@@ -520,41 +589,32 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 InkWell(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24, top: 9),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(34),
-                          color: const Color(0xFFFEE0DF)),
-                      width: double.infinity,
-                      height: (screenHeight / 10.61),
-                    ),
-                  ),
+                  child: getAllData(),
                 ),
-                InkWell(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24, top: 9),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(34),
-                          color: const Color(0xFFDCE7FD)),
-                      width: double.infinity,
-                      height: (screenHeight / 10.61),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24, top: 9),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(34),
-                          color: const Color(0xFFDCE7FD)),
-                      width: double.infinity,
-                      height: (screenHeight / 10.61),
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(left: 24, right: 24, top: 9),
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(34),
+                //           color: const Color(0xFFDCE7FD)),
+                //       width: double.infinity,
+                //       height: (screenHeight / 10.61),
+                //     ),
+                //   ),
+                // ),
+                // InkWell(
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(left: 24, right: 24, top: 9),
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(34),
+                //           color: const Color(0xFFDCE7FD)),
+                //       width: double.infinity,
+                //       height: (screenHeight / 10.61),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

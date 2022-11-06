@@ -124,7 +124,7 @@ class _ReminderState extends State<Reminder> {
         }
         return const Center(
             child: CircularProgressIndicator(
-          color: yellow,
+          color: purple,
         ));
       },
     );

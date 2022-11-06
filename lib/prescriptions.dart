@@ -2,7 +2,7 @@
 
 import 'package:testing/main.dart';
 
-import 'data_class.dart';
+import 'data_class_meds.dart';
 import 'package:flutter/material.dart';
 import 'package:draggable_home/draggable_home.dart';
 
@@ -74,16 +74,9 @@ class _PrescriptionState extends State<Prescription> {
           onPressed: () => {
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => PrescriptionApp())),
-
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             const HomePage()), // this mainpage is your page to refresh
-            //     (Route<dynamic> route) => false)
           },
           icon: const Icon(Icons.refresh),
-          color: Colors.white,
+          color: Colors.black54,
         ),
       ],
     );
@@ -98,7 +91,7 @@ class _PrescriptionState extends State<Prescription> {
           style: Theme.of(context)
               .textTheme
               .headline2!
-              .copyWith(color: Colors.white, fontSize: 40),
+              .copyWith(color: Color.fromARGB(255, 70, 70, 70), fontSize: 40),
           textAlign: TextAlign.center,
         ),
       ),
@@ -150,13 +143,13 @@ class _PrescriptionState extends State<Prescription> {
             title: Text(
               dataList[index]["name"],
               style: const TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 70, 70, 70),
                   height: 1.5,
                   fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              dataList[index]["relationship"],
-              style: const TextStyle(color: Colors.white),
+              dataList[index]["disease"],
+              style: const TextStyle(color: Colors.black54),
             ),
             trailing: const Icon(Icons.dark_mode, color: Colors.white),
           ),
