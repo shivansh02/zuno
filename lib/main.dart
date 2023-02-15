@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
-import 'package:testing/reminders.dart';
+import 'package:zuno/reminders.dart';
 import 'vault.dart';
 import 'people_you_know.dart';
 import 'prescriptions.dart';

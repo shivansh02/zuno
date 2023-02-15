@@ -6,7 +6,7 @@ import 'data_game.dart';
 import 'TileModel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:testing/main.dart';
+import 'package:zuno/main.dart';
 
 const purple = Color.fromRGBO(122, 135, 251, 1);
 

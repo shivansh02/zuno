@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:testing/main.dart';
+import 'package:zuno/main.dart';
 
 import 'data_class_meds.dart';
 import 'package:flutter/material.dart';

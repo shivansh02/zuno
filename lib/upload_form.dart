@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:testing/people_you_know.dart';
+import 'package:zuno/people_you_know.dart';
 
 const purple = Color.fromRGBO(122, 135, 251, 1);
 
